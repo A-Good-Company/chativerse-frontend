@@ -1,6 +1,6 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, TouchableOpacity, Text } from 'react-native';
 
 import { HapticTab } from '@/components/HapticTab';
 import { IconSymbol } from '@/components/ui/IconSymbol';
@@ -15,7 +15,20 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
+        // Show header so that we can place our login button on the top right.
+        headerShown: true,
+        headerRight: () => (
+          <TouchableOpacity
+            style={{ marginRight: 16, padding: 8 }}
+            onPress={() => {
+              // TODO: Add your login navigation or login action here.
+              console.log('Login button pressed');
+            }}>
+            <Text style={{ color: Colors[colorScheme ?? 'light'].tint, fontSize: 16 }}>
+              Login
+            </Text>
+          </TouchableOpacity>
+        ),
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
         tabBarStyle: Platform.select({
